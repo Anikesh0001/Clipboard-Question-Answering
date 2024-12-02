@@ -1,81 +1,102 @@
-# Clipboard Question Answering 
+# Clipboard Question Answering
 
-This project is a clipboard monitoring bot that uses the Gemini API to generate answers to questions copied to the clipboard. It displays the answers in a dialog box on macOS.
+This project is a clipboard monitoring bot that automatically generates answers to questions copied to the clipboard using the Gemini API. It displays the generated answers in a dialog box on macOS.
 
 ## Features
 
-- Monitors the clipboard for new text (questions).
-- Uses the Gemini API to generate answers to the questions.
-- Displays the answers in a macOS dialog box.
-- Runs continuously in the background, checking the clipboard for changes.
+- **Clipboard Monitoring**: Continuously monitors the clipboard for new text (questions).
+- **AI-Powered Answers**: Uses the Gemini API to generate answers for the copied questions.
+- **macOS Integration**: Displays the answers in a macOS dialog box using AppleScript.
+- **Background Operation**: Runs in the background, checking the clipboard for changes and updating in real-time.
 
 ## Demo Video
 
-[Click here to watch the demo video](./demo.mp4)
+*Coming soon!*
 
 ## Prerequisites
 
-- Python 3.x
-- macOS (for the AppleScript dialog box functionality)
-- Gemini API key
-- Required Python packages: `google-generativeai`, `pyperclip`
+Before you start, make sure you have the following installed:
+
+- **Python 3.x**: Required to run the bot.
+- **macOS**: Required for the AppleScript functionality used to display dialog boxes.
+- **Gemini API Key**: You need a valid Gemini API key to interact with the Gemini API.
+- **Required Python Packages**:
+  - `google-generativeai`
+  - `customtkinter`
+  - `pyperclip`
 
 ## Installation
 
-1. Clone the repository:
+Follow these steps to set up the project:
+
+1. **Clone the repository**:
 
     ```sh
     git clone https://github.com/Anikesh0001/clipboard-question-answering.git
     cd clipboard-question-answering
     ```
 
-2. Create a virtual environment and activate it:
+2. **Create a virtual environment**:
 
     ```sh
     python3 -m venv venv
     source venv/bin/activate
     ```
 
-3. Install the required packages:
+3. **Install the required dependencies**:
 
     ```sh
-    pip install google-generativeai pyperclip
+    pip install -r 'requirements.txt'
     ```
 
-4. Replace the `API_KEY` in the script with your actual Gemini API key.
+4. **Set up your Gemini API Key**:
+    - Open the script and replace the `API_KEY` placeholder with your actual Gemini API key.
 
 ## Usage
 
-1. Ensure you are in the virtual environment:
+1. **Activate the virtual environment** (if not already active):
 
     ```sh
     source venv/bin/activate
     ```
 
-2. Run the script:
+2. **Run the script**:
 
     ```sh
     python question_answer.py
     ```
 
-3. The bot will start monitoring the clipboard for questions. Copy any question to the clipboard, and the bot will fetch the answer using the Gemini API and display it in a macOS dialog box.
+3. The bot will start monitoring the clipboard. Copy any question to the clipboard, and the bot will automatically:
+   - Fetch the answer using the Gemini API.
+   - Display the answer in a macOS dialog box.
 
 ## How It Works
 
-1. The script configures the Gemini API with your API key.
-2. It enters a loop that continuously checks the clipboard for new text.
-3. If new text is detected, it is sent to the Gemini API to generate an answer.
-4. The generated answer is displayed in a macOS dialog box using AppleScript.
+1. **API Configuration**: The script sets up the Gemini API with your API key.
+2. **Clipboard Monitoring**: It enters a continuous loop that checks the clipboard for any new text (questions).
+3. **Generate Answer**: Once new text is detected, the bot sends the text to the Gemini API to get a response.
+4. **Display Answer**: The generated answer is then displayed in a macOS dialog box using AppleScript for a seamless user experience.
 
 ## Code Explanation
 
-- `get_answer(question)`: Fetches an answer from the Gemini API for the given question.
-- `escape_quotes(text)`: Escapes quotes for use in AppleScript.
-- `show_answer(answer)`: Displays the answer in a macOS dialog box using AppleScript.
-- `main()`: Monitors the clipboard for changes and processes new text to get and display answers.
+- **`get_answer(question)`**: Sends the given question to the Gemini API and fetches the response.
+- **`escape_quotes(text)`**: Escapes quotes in the text for compatibility with AppleScript.
+- **`show_answer(answer)`**: Displays the generated answer in a macOS dialog box via AppleScript.
+- **`monitor_clipboard()`**: Continuously monitors the clipboard for new questions and triggers the answer generation process when new text is detected.
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions are welcome! If you have suggestions, bug fixes, or enhancements, please open an issue or submit a pull request.
 
+### How to Contribute
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -am 'Add feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a new pull request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
 
