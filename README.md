@@ -11,10 +11,7 @@ This project is a clipboard monitoring bot that uses the Gemini API to generate 
 
 ## Demo Video
 
-<video width="640" height="360" controls>
-  <source src="demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Click here to watch the demo video](./demo.mp4)
 
 ## Prerequisites
 
