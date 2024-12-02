@@ -1,4 +1,4 @@
-# Clipboard Question Answering Bot
+# Clipboard Question Answering 
 
 This project is a clipboard monitoring bot that uses the Gemini API to generate answers to questions copied to the clipboard. It displays the answers in a dialog box on macOS.
 
@@ -25,8 +25,8 @@ This project is a clipboard monitoring bot that uses the Gemini API to generate 
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/clipboard-question-answering-bot.git
-    cd clipboard-question-answering-bot
+    git clone https://github.com/Anikesh0001/clipboard-question-answering.git
+    cd clipboard-question-answering
     ```
 
 2. Create a virtual environment and activate it:
@@ -55,7 +55,7 @@ This project is a clipboard monitoring bot that uses the Gemini API to generate 
 2. Run the script:
 
     ```sh
-    python clipboard_bot.py
+    python question_answer.py
     ```
 
 3. The bot will start monitoring the clipboard for questions. Copy any question to the clipboard, and the bot will fetch the answer using the Gemini API and display it in a macOS dialog box.
