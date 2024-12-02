@@ -9,10 +9,10 @@ This project is a clipboard monitoring bot that uses the Gemini API to generate 
 - Displays the answers in a macOS dialog box.
 - Runs continuously in the background, checking the clipboard for changes.
 
-  ## Demo Video
+ ## Demo Video
 
 <video width="640" height="360" controls>
-  <source src="demo.mp4" type="video/mp4">
+  <source src="path/to/your/demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
