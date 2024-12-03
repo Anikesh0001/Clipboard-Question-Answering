@@ -10,7 +10,7 @@ This project is a clipboard monitoring bot that automatically generates answers 
 
 ## Demo Video
 
-*Coming soon!*
+![Demo](Demo.gif)
 
 ## Prerequisites
 
