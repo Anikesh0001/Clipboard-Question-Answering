@@ -29,40 +29,40 @@ Follow these steps to set up the project:
 
 1. **Clone the repository**:
 
-    ```sh
-    git clone https://github.com/Anikesh0001/clipboard-question-answering.git
-    cd clipboard-question-answering
-    ```
+   ```sh
+   git clone https://github.com/Anikesh0001/clipboard-question-answering.git
+   cd clipboard-question-answering
+   ```
 
 2. **Create a virtual environment**:
 
-    ```sh
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+   ```sh
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
 3. **Install the required dependencies**:
 
-    ```sh
-    pip install -r 'requirements.txt'
-    ```
+   ```sh
+   pip install -r 'requirements.txt'
+   ```
 
 4. **Set up your Gemini API Key**:
-    - Open the script and replace the `API_KEY` placeholder with your actual Gemini API key.
+   - Open the script and replace the `API_KEY` placeholder with your actual Gemini API key.
 
 ## Usage
 
 1. **Activate the virtual environment** (if not already active):
 
-    ```sh
-    source venv/bin/activate
-    ```
+   ```sh
+   source venv/bin/activate
+   ```
 
 2. **Run the script**:
 
-    ```sh
-    python question_answer.py
-    ```
+   ```sh
+   python question_answer.py
+   ```
 
 3. The bot will start monitoring the clipboard. Copy any question to the clipboard, and the bot will automatically:
    - Fetch the answer using the Gemini API.
@@ -84,15 +84,32 @@ Follow these steps to set up the project:
 - **`get_answer(question)`**: Sends the given question to the Gemini API and fetches the response. If there’s an error, it returns a message indicating the failure.
 - **`copy_to_clipboard(text)`**: Copies the provided text to the clipboard using the `pyperclip` library.
 - **`clear_history(tab)`**: Clears the history stored in the `history_data` list and updates the history tab in the GUI.
-- **`update_history_tab(tab)`**: Refreshes the history tab with the list of all past questions and answers. It dynamically generates a list of frames containing each question-answer pair and a button to copy the answer to the clipboard.
-- **`update_window_content(tab1, tab2, question, answer)`**: Updates the "Current QNA" tab with the latest question and answer. It also appends the data to the history and refreshes the history tab.
-- **`monitor_clipboard(tab1, tab2)`**: Continuously monitors the clipboard for new text. When new text is detected, it calls `get_answer()` to fetch the answer and updates the window with the result. This runs in a separate thread to allow continuous clipboard monitoring while the UI remains responsive.
-- **`main()`**: The entry point of the application, where the GUI window is created using `customtkinter`. It sets up the tabs for "Current QNA" and "History", starts the clipboard monitoring in a background thread, and manages the main event loop.
+- **`update_history_tab(tab)`**: Dynamically updates the History tab with the list of all previously asked questions and their corresponding answers. Each question-answer pair includes a "Copy Answer" button.
+- **`update_window_content(tab1, tab2, question, answer)`**: Updates the content of the "Current QNA" tab with the latest question and answer.
+- **`update_chat_tab(chat_tab)`**: Updates the Chat with AI tab to display a list of all interactions (questions and answers) in a scrollable format, with options to submit new questions.
+- **`monitor_clipboard(tab1, tab2)`**: Continuously monitors the clipboard for new text, checks if it's a new question, and fetches the answer using the Gemini API.
+- **`main()`**: Initializes the application, creates the CustomTkinter GUI, and starts the clipboard monitoring thread.
 
+## GUI Overview
 
-## Contributing
+- **Tab 1: Current QNA**  
+  Displays the current question and its answer with a button to copy the answer to the clipboard.
 
-Contributions are welcome! If you have suggestions, bug fixes, or enhancements, please open an issue or submit a pull request.
+- **Tab 2: History**  
+  Displays a scrollable list of previously asked questions and their answers with a "Clear History" button.
+
+- **Tab 3: Chat with AI**  
+  Allows users to interact with the AI by entering a question and receiving an instant answer.
+
+- **Close Button**  
+  Gracefully exits the application.
+
+## Future Enhancements
+
+- **Dark Mode Customization**: The UI is already dark-themed but can be made customizable.
+- **Answer Summarization**: Add the option to summarize lengthy answers.
+- **API Key Management**: A GUI-based form to manage the Gemini API key directly from the app.
+- **Offline Storage**: Store Q&A history in a local file or database to maintain a persistent history across sessions.
 
 ### How to Contribute
 
@@ -105,4 +122,3 @@ Contributions are welcome! If you have suggestions, bug fixes, or enhancements, 
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
