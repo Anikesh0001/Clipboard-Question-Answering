@@ -12,7 +12,7 @@ logging.basicConfig(
 )
 
 API_KEY = (
-    "AIzaSyCC1M5U1TJFr6Xar00UTdIeM9cdkBUe3Xc"  # Replace with your actual Gemini API key
+    "Enter Your Gemini API key"  # Replace with your actual Gemini API key
 )
 MODEL_NAME = "gemini-1.5-flash"
 genai.configure(api_key=API_KEY)
