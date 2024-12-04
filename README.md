@@ -21,7 +21,6 @@ Before you start, make sure you have the following installed:
 - **Required Python Packages**:
   - `google-generativeai`
   - `customtkinter`
-  - `CTkMessagebox`
   - `pyperclip`
 
 ## Installation
@@ -49,7 +48,7 @@ Follow these steps to set up the project:
    ```
 
 4. **Set up your Gemini API Key**:
-   - Run the script and enter the Gemini API key when asked for. ( Only required for the first run )
+   - Open the script and replace the `API_KEY` placeholder with your actual Gemini API key.
 
 ## Usage
 
@@ -107,10 +106,10 @@ Follow these steps to set up the project:
 
 ## Future Enhancements
 
-- [ ] **Dark Mode Customization**: The UI is already dark-themed but can be made customizable.
-- [ ] **Answer Summarization**: Add the option to summarize lengthy answers.
-- [x] **API Key Management**: A GUI-based form to manage the Gemini API key directly from the app.
-- [ ] **Offline Storage**: Store Q&A history in a local file or database to maintain a persistent history across sessions.
+- **Dark Mode Customization**: The UI is already dark-themed but can be made customizable.
+- **Answer Summarization**: Add the option to summarize lengthy answers.
+- **API Key Management**: A GUI-based form to manage the Gemini API key directly from the app.
+- **Offline Storage**: Store Q&A history in a local file or database to maintain a persistent history across sessions.
 
 ### How to Contribute
 
