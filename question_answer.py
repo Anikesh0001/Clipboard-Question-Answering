@@ -1,9 +1,14 @@
+import os
 import time
+
 import logging
 import pyperclip
 import threading
-import customtkinter as ctk
+
 import google.generativeai as genai
+
+import customtkinter as ctk
+from CTkMessagebox import CTkMessagebox
 
 logging.basicConfig(
     level=logging.INFO,
@@ -11,17 +16,49 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 
-API_KEY = (
-    "AIzaSyCC1M5U1TJFr6Xar00UTdIeM9cdkBUe3Xc"  # Replace with your actual Gemini API key
-)
 MODEL_NAME = "gemini-1.5-flash"
-genai.configure(api_key=API_KEY)
 
 history_data = []
-chat_data = []  
+chat_data = []
 
-def test_api_key():
+
+def get_api_key():
+    api_key_file = "KEY.txt"
+
+    if os.path.exists(api_key_file):
+        with open(api_key_file, "r") as f:
+            api_key = f.read().strip()
+            if api_key:
+                logging.info("API Key Loaded From The File.")
+                return api_key
+            else:
+                logging.warning("API Key File Is Empty.")
+    else:
+        logging.info("API Key File Not Found.")
+
+    api_key_dialog = ctk.CTkInputDialog(
+        text="Enter The Gemini API Key:", title="GENAI API Key"
+    )
+
+    api_key = api_key_dialog.get_input()
+    if api_key:
+        with open(api_key_file, "w") as f:
+            f.write(api_key.strip())
+        logging.info("API Key Saved To File.")
+        return api_key.strip()
+    else:
+        CTkMessagebox(
+            title="Error",
+            message="API Key Is Required To Run The Program.",
+            icon="cancel",
+        )
+        logging.error("API Key Not Provided.")
+        return None
+
+
+def test_api_key(api_key):
     try:
+        genai.configure(api_key=api_key)
         model = genai.GenerativeModel(MODEL_NAME)
         model.generate_content("Hello There! How Are You?")
         logging.info("API Key Is Valid And Working")
@@ -29,6 +66,7 @@ def test_api_key():
     except Exception as e:
         logging.error(f"API Key Error : {str(e)}")
         return False
+
 
 def get_answer(question):
     if not question:
@@ -40,16 +78,19 @@ def get_answer(question):
     except Exception as e:
         return f"Error while generating the answer: {str(e)}"
 
+
 def copy_to_clipboard(text):
     pyperclip.copy(text)
     root.clipboard_clear()
     root.clipboard_append(text)
     root.update()
 
+
 def clear_history(tab):
     global history_data
     history_data.clear()
     update_history_tab(tab)
+
 
 def update_history_tab(tab):
     for widget in tab.winfo_children():
@@ -88,7 +129,7 @@ def update_history_tab(tab):
             font=("Arial", 13, "bold"),
             text_color="#F1F1F1",
             anchor="w",
-            wraplength=500,  
+            wraplength=500,
         )
         question_label.pack(padx=10, pady=(8, 5), fill="x")
 
@@ -97,7 +138,7 @@ def update_history_tab(tab):
             text=f"A{idx + 1}: {answer}",
             font=("Arial", 12),
             text_color="#D1D1D1",
-            wraplength=500,  
+            wraplength=500,
             anchor="w",
         )
         answer_label.pack(padx=10, pady=(0, 10), fill="x")
@@ -120,6 +161,7 @@ def update_history_tab(tab):
         canvas.config(width=canvas_width, height=canvas_height)
 
     frame.bind("<Configure>", resize_canvas)
+
 
 def update_window_content(tab1, tab2, question, answer):
     if question and answer:
@@ -144,6 +186,7 @@ def update_window_content(tab1, tab2, question, answer):
     ctk.CTkButton(
         tab1, text="Copy to Clipboard", command=lambda: copy_to_clipboard(answer)
     ).pack(pady=10)
+
 
 def update_chat_tab(chat_tab):
     for widget in chat_tab.winfo_children():
@@ -230,6 +273,7 @@ def update_chat_tab(chat_tab):
 
     chat_frame.bind("<Configure>", resize_canvas)
 
+
 def monitor_clipboard(tab1, tab2):
     last_text = pyperclip.paste().strip()
 
@@ -246,12 +290,20 @@ def monitor_clipboard(tab1, tab2):
 
     check_clipboard()
 
+
 def main():
     logging.info("Starting The Clipboard Monitoring Script ...")
 
-    if not test_api_key():
+    api_key = get_api_key()
+    if not api_key:
+        logging.error("Exiting Due To Missing API Key.")
+        return
+
+    if not test_api_key(api_key):
         logging.error("Exiting Due To Invalid API Key.")
         return
+
+    genai.configure(api_key=api_key)
 
     global root
     root = ctk.CTk()
@@ -276,6 +328,7 @@ def main():
     update_chat_tab(tab3)
 
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
